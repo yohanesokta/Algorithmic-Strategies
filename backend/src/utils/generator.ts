@@ -3,6 +3,7 @@ export interface MataKuliah {
   nama: string;
   sks: number;
   ruangan: string;
+  hari: string;
   jamMulai: number;
   jamSelesai: number;
 }
@@ -25,6 +26,8 @@ const DAFTAR_NAMA_MATKUL = [
   "Cloud Computing"
 ];
 
+const HARI = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
+
 const RUANGAN_F: string[] = [];
 for (let lantai = 1; lantai <= 4; lantai++) {
   for (let nomorRuang = 1; nomorRuang <= 8; nomorRuang++) {
@@ -45,7 +48,8 @@ export const buatDataMataKuliah = (): MataKuliah[] => {
 
     for (let i = 0; i < jumlahVariasi; i++) {
       const ruangan = SEMUA_RUANGAN[Math.floor(Math.random() * SEMUA_RUANGAN.length)];
-      const jamMulai = Math.floor(Math.random() * 10) + 7;
+      const hari = HARI[Math.floor(Math.random() * HARI.length)];
+      const jamMulai = Math.floor(Math.random() * 8) + 7;
       const durasi = sks;
       
       daftarMatkul.push({
@@ -53,6 +57,7 @@ export const buatDataMataKuliah = (): MataKuliah[] => {
         nama,
         sks,
         ruangan,
+        hari,
         jamMulai: jamMulai,
         jamSelesai: jamMulai + durasi
       });

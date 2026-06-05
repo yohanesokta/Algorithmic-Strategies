@@ -3,15 +3,27 @@ import path from "path";
 import { MataKuliah } from "./generator";
 
 export const hitungSaranKRS = (daftarMatkul: MataKuliah[], batasSks: number): MataKuliah[] => {
-  const matkulUrut = [...daftarMatkul].sort((a, b) => a.jamSelesai - b.jamSelesai);
+  const hariKeIndeks: { [key: string]: number } = {
+    "Senin": 0, "Selasa": 1, "Rabu": 2, "Kamis": 3, "Jumat": 4
+  };
+
+  const matkulUrut = [...daftarMatkul].sort((a, b) => {
+    if (a.hari !== b.hari) return hariKeIndeks[a.hari] - hariKeIndeks[b.hari];
+    return a.jamSelesai - b.jamSelesai;
+  });
+
   const jumlahMatkul = matkulUrut.length;
-  
   const cekApakahLab = (namaRuang: string) => namaRuang.startsWith("Lab");
 
   const pendahulu = new Array(jumlahMatkul).fill(-1);
   for (let i = 0; i < jumlahMatkul; i++) {
     for (let j = i - 1; j >= 0; j--) {
-      const jedaWaktu = (cekApakahLab(matkulUrut[j].ruangan) !== cekApakahLab(matkulUrut[i].ruangan)) ? 1 : 0;
+      if (matkulUrut[j].hari !== matkulUrut[i].hari) {
+        pendahulu[i] = j;
+        break;
+      }
+      
+      const jedaWaktu = (cekApakahLab(matkulUrut[j].ruangan) !== cekApakahLab(matkulUrut[i].ruangan)) ? 0.25 : 0;
       if (matkulUrut[j].jamSelesai + jedaWaktu <= matkulUrut[i].jamMulai) {
         pendahulu[i] = j;
         break;
