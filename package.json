@@ -1,0 +1,18 @@
+{
+  "name": "krs-suggest-system",
+  "version": "1.0.0",
+  "description": "Sistem Sugesti KRS Mahasiswa dengan Algoritma Dynamic Programming",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "npm install && cd backend && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "live-server frontend --port=5500",
+    "dev": "npm run dev:backend & npm run dev:frontend",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "live-server frontend --port=5500",
+    "start": "npm run start:backend & npm run start:frontend"
+  },
+  "dependencies": {
+    "live-server": "^1.2.2"
+  }
+}
