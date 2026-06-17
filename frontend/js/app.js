@@ -97,6 +97,7 @@ function tampilkanSaran(data) {
 
   data.suggestions.forEach(course => {
     const row = document.createElement('tr');
+    const penuh = (course.penuh) ? "<span style= 'color:red;'>penuh</span>" : "<span style='color:green;'>tersedia</span>"
     row.innerHTML = `
             <td>${course.id}</td>
             <td>${course.nama}</td>
@@ -104,6 +105,7 @@ function tampilkanSaran(data) {
             <td>${course.hari}</td>
             <td>${course.ruangan}</td>
             <td>${course.jamMulai}:00 - ${course.jamSelesai}:00</td>
+            <td>${penuh}</td>
         `;
     tabelSaranBody.appendChild(row);
     totalSks += course.sks;

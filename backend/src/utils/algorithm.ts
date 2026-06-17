@@ -7,12 +7,12 @@ export const hitungSaranKRS = (daftarMatkul: MataKuliah[], batasSks: number): Ma
     "Senin": 0, "Selasa": 1, "Rabu": 2, "Kamis": 3, "Jumat": 4
   };
 
-  const matkulUrut = [...daftarMatkul].sort((a, b) => {
+  let matkulUrut = [...daftarMatkul].sort((a, b) => {
     if (a.hari !== b.hari) return hariKeIndeks[a.hari] - hariKeIndeks[b.hari];
     return a.jamSelesai - b.jamSelesai;
   });
 
-  matkulUrut.filter((element: MataKuliah) => {
+  matkulUrut = matkulUrut.filter((element: MataKuliah) => {
     return !element.penuh
   })
 

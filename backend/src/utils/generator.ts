@@ -42,7 +42,7 @@ const SEMUA_RUANGAN = [...RUANGAN_F, ...RUANGAN_LAB];
 export const buatDataMataKuliah = (): MataKuliah[] => {
   const daftarMatkul: MataKuliah[] = [];
   let penghitungId = 1;
-  let max_penuh = 3;
+  let max_penuh = 100;
   DAFTAR_NAMA_MATKUL.forEach((nama) => {
     const jumlahVariasi = Math.floor(Math.random() * 2) + 2;
     const sks = Math.random() > 0.5 ? 3 : 2;
