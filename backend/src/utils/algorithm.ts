@@ -22,7 +22,7 @@ export const hitungSaranKRS = (daftarMatkul: MataKuliah[], batasSks: number): Ma
         pendahulu[i] = j;
         break;
       }
-      
+
       const jedaWaktu = (cekApakahLab(matkulUrut[j].ruangan) !== cekApakahLab(matkulUrut[i].ruangan)) ? 0.25 : 0;
       if (matkulUrut[j].jamSelesai + jedaWaktu <= matkulUrut[i].jamMulai) {
         pendahulu[i] = j;
@@ -31,12 +31,14 @@ export const hitungSaranKRS = (daftarMatkul: MataKuliah[], batasSks: number): Ma
     }
   }
 
-  const tabelDp: number[][] = Array.from({ length: jumlahMatkul + 1 }, () => new Array(batasSks + 1).fill(0));
 
+  console.log(pendahulu);
+
+  const tabelDp: number[][] = Array.from({ length: jumlahMatkul + 1 }, () => new Array(batasSks + 1).fill(0));
   for (let i = 1; i <= jumlahMatkul; i++) {
     const matkul = matkulUrut[i - 1];
     const indeksPendahulu = pendahulu[i - 1] + 1;
-    
+
     for (let s = 1; s <= batasSks; s++) {
       if (matkul.sks <= s) {
         const opsiAmbil = matkul.sks + tabelDp[indeksPendahulu][s - matkul.sks];
@@ -48,6 +50,8 @@ export const hitungSaranKRS = (daftarMatkul: MataKuliah[], batasSks: number): Ma
     }
   }
 
+
+
   const pathTmp = path.join(__dirname, "../../tmp.json");
   fs.writeFileSync(pathTmp, JSON.stringify(tabelDp, null, 2));
 
@@ -58,7 +62,7 @@ export const hitungSaranKRS = (daftarMatkul: MataKuliah[], batasSks: number): Ma
   while (baris > 0 && kolom > 0) {
     const matkul = matkulUrut[baris - 1];
     const indeksPendahulu = pendahulu[baris - 1] + 1;
-    
+
     if (matkul.sks <= kolom && (matkul.sks + tabelDp[indeksPendahulu][kolom - matkul.sks] > tabelDp[baris - 1][kolom])) {
       hasilSaran.push(matkul);
       kolom -= matkul.sks;
