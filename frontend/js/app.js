@@ -7,6 +7,11 @@ const spanMaxSks = document.getElementById('maxSks');
 const tabelTersediaBody = document.querySelector('#availableTable tbody');
 const tabelSaranBody = document.querySelector('#courseTable tbody');
 const spanTotalSks = document.getElementById('totalSks');
+const endpoint = "http://localhost:3000"
+const spanInfoNim = document.getElementById('infoNim');
+const spanInfoNama = document.getElementById('infoNama');
+const spanInfoMaxSks = document.getElementById('infoMaxSks');
+let maxSks = 0;
 
 tombolCek.addEventListener('click', () => {
   const nim = inputNim.value;
@@ -24,7 +29,7 @@ tombolSuggest.addEventListener('click', () => {
 
 async function ambilMatkulTersedia(nim) {
   try {
-    const response = await fetch('https://algorithmic-strategies.vercel.app/ambil-matkul', {
+    const response = await fetch(`${endpoint}/ambil-matkul`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nim })
@@ -33,6 +38,10 @@ async function ambilMatkulTersedia(nim) {
     if (!response.ok) throw new Error('Gagal mengambil data');
 
     const data = await response.json();
+    maxSks = data.maxSks;
+    spanInfoNim.textContent = data.nim;
+    spanInfoNama.textContent = data.nama;
+    spanInfoMaxSks.textContent = data.maxSks;
     tampilkanTersedia(data.availableCourses);
   } catch (error) {
     console.error(error);
@@ -47,6 +56,7 @@ function tampilkanTersedia(courses) {
 
   courses.forEach(course => {
     const row = document.createElement('tr');
+    const penuh = (course.penuh) ? "<span style= 'color:red;'>penuh</span>" : "<span style='color:green;'>tersedia</span>"
     row.innerHTML = `
             <td>${course.id}</td>
             <td>${course.nama}</td>
@@ -54,6 +64,8 @@ function tampilkanTersedia(courses) {
             <td>${course.hari}</td>
             <td>${course.ruangan}</td>
             <td>${course.jamMulai}:00 - ${course.jamSelesai}:00</td>
+            <td>${penuh}</td>
+
         `;
     tabelTersediaBody.appendChild(row);
   });
@@ -61,7 +73,7 @@ function tampilkanTersedia(courses) {
 
 async function ambilSugesti(nim) {
   try {
-    const response = await fetch('http://localhost:3000/suggest', {
+    const response = await fetch(`${endpoint}/suggest`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nim })
@@ -79,7 +91,7 @@ async function ambilSugesti(nim) {
 
 function tampilkanSaran(data) {
   divHasil.classList.remove('hidden');
-  spanMaxSks.textContent = data.maxSks;
+  spanMaxSks.textContent = maxSks;
   tabelSaranBody.innerHTML = '';
   let totalSks = 0;
 

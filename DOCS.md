@@ -38,3 +38,9 @@ Generator menghasilkan data acak meliputi:
 1.  `npm run install-all`
 2.  `npm run dev`
 3.  Buka `http://localhost:5500`.
+
+## 5. Alur Pemrosesan Endpoint API
+*   **Endpoint `/ambil-matkul` (POST):**
+    Menerima input NIM mahasiswa, kemudian menghasilkan daftar mata kuliah yang tersedia (`daftarMatkulTersedia`) secara acak melalui fungsi generator data. Pada tahap ini, batas maksimal SKS (antara 19 hingga 24 SKS) juga dihasilkan secara acak dan disimpan sebagai batas SKS global. Hasil respons berisi data NIM, `maxSks`, dan `availableCourses`.
+*   **Endpoint `/suggest` (POST):**
+    Menerima input NIM mahasiswa dan hanya bertugas untuk mengeksekusi algoritma Dynamic Programming (`hitungSaranKRS`) dengan parameter daftar mata kuliah tersedia serta batas SKS global yang sudah ditentukan sebelumnya pada tahap `/ambil-matkul`. Endpoint ini tidak menghasilkan data baru atau mengubah batas SKS, melainkan murni memproses dan mengembalikan hasil saran mata kuliah terbaik.

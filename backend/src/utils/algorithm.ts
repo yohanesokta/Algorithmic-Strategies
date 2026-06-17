@@ -12,12 +12,17 @@ export const hitungSaranKRS = (daftarMatkul: MataKuliah[], batasSks: number): Ma
     return a.jamSelesai - b.jamSelesai;
   });
 
+  matkulUrut.filter((element: MataKuliah) => {
+    return !element.penuh
+  })
+
   const jumlahMatkul = matkulUrut.length;
   const cekApakahLab = (namaRuang: string) => namaRuang.startsWith("Lab");
 
   const pendahulu = new Array(jumlahMatkul).fill(-1);
   for (let i = 0; i < jumlahMatkul; i++) {
     for (let j = i - 1; j >= 0; j--) {
+
       if (matkulUrut[j].hari !== matkulUrut[i].hari) {
         pendahulu[i] = j;
         break;
@@ -32,7 +37,6 @@ export const hitungSaranKRS = (daftarMatkul: MataKuliah[], batasSks: number): Ma
   }
 
 
-  console.log(pendahulu);
 
   const tabelDp: number[][] = Array.from({ length: jumlahMatkul + 1 }, () => new Array(batasSks + 1).fill(0));
   for (let i = 1; i <= jumlahMatkul; i++) {

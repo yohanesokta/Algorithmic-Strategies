@@ -1,61 +1,70 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Sugesti KRS Mahasiswa</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Sistem Pemilihan Matakuliah Otomatis</h1>
-        <div class="input-group">
-            <label for="nim">Masukkan NIM Anda:</label>
-            <input type="text" id="nim" placeholder="Contoh: 2200018001">
-            <button id="checkBtn">Tampilkan Matakuliah</button>
-        </div>
-        
-        <div id="availableSection" class="hidden">
-            <h2>Daftar Matakuliah Tersedia</h2>
-            <table id="availableTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Matakuliah</th>
-                        <th>SKS</th>
-                        <th>Hari</th>
-                        <th>Ruangan</th>
-                        <th>Jam</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <div class="action-group">
-                <button id="suggestBtn">Sugestikan Pilihan Terbaik</button>
-            </div>
-        </div>
 
-        <div id="result" class="hidden">
-            <h2>Hasil Sugestian Terbaik</h2>
-            <p>Maksimal SKS: <span id="maxSks"></span></p>
-            <table id="courseTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Matakuliah</th>
-                        <th>SKS</th>
-                        <th>Hari</th>
-                        <th>Ruangan</th>
-                        <th>Jam</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <p class="total-info">Total SKS Terpilih: <span id="totalSks"></span></p>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Sugesti KRS Mahasiswa</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Sistem Pemilihan Matakuliah Otomatis</h1>
+    <div class="input-group">
+      <label for="nim">Masukkan NIM Anda:</label>
+      <input type="text" id="nim" placeholder="Contoh: 2200018001">
+      <button id="checkBtn">Tampilkan Matakuliah</button>
     </div>
-    <script src="js/app.js"></script>
+
+    <div id="availableSection" class="hidden">
+      <div class="student-info">
+        <p>NIM: <span id="infoNim"></span></p>
+        <p>Nama: <span id="infoNama"></span></p>
+        <p>Maksimal SKS: <span id="infoMaxSks"></span> SKS</p>
+      </div>
+      <h2>Daftar Matakuliah Tersedia</h2>
+      <table id="availableTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Matakuliah</th>
+            <th>SKS</th>
+            <th>Hari</th>
+            <th>Ruangan</th>
+            <th>Jam</th>
+            <th>Penuh</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <div class="action-group">
+        <button id="suggestBtn">Sugestikan Pilihan Terbaik</button>
+      </div>
+    </div>
+
+    <div id="result" class="hidden">
+      <h2>Hasil Sugestian Terbaik</h2>
+      <p>Maksimal SKS: <span id="maxSks"></span></p>
+      <table id="courseTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Matakuliah</th>
+            <th>SKS</th>
+            <th>Hari</th>
+            <th>Ruangan</th>
+            <th>Jam</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <p class="total-info">Total SKS Terpilih: <span id="totalSks"></span></p>
+    </div>
+  </div>
+  <script src="js/app.js"></script>
 </body>
+
 </html>

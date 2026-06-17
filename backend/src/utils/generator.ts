@@ -6,6 +6,7 @@ export interface MataKuliah {
   hari: string;
   jamMulai: number;
   jamSelesai: number;
+  penuh: number;
 }
 
 const DAFTAR_NAMA_MATKUL = [
@@ -41,7 +42,7 @@ const SEMUA_RUANGAN = [...RUANGAN_F, ...RUANGAN_LAB];
 export const buatDataMataKuliah = (): MataKuliah[] => {
   const daftarMatkul: MataKuliah[] = [];
   let penghitungId = 1;
-
+  let max_penuh = 3;
   DAFTAR_NAMA_MATKUL.forEach((nama) => {
     const jumlahVariasi = Math.floor(Math.random() * 2) + 2;
     const sks = Math.random() > 0.5 ? 3 : 2;
@@ -51,7 +52,12 @@ export const buatDataMataKuliah = (): MataKuliah[] => {
       const hari = HARI[Math.floor(Math.random() * HARI.length)];
       const jamMulai = Math.floor(Math.random() * 8) + 7;
       const durasi = sks;
-      
+      let penuh = 0;
+      if (max_penuh > 0) {
+        penuh = Math.floor(Math.random() * 2);
+        max_penuh -= 1;
+        console.log("dapet\n")
+      }
       daftarMatkul.push({
         id: `C${penghitungId++}`,
         nama,
@@ -59,10 +65,28 @@ export const buatDataMataKuliah = (): MataKuliah[] => {
         ruangan,
         hari,
         jamMulai: jamMulai,
-        jamSelesai: jamMulai + durasi
+        jamSelesai: jamMulai + durasi,
+        penuh: penuh
       });
     }
   });
 
   return daftarMatkul;
+};
+
+const DAFTAR_NAMA_MAHASISWA = [
+  "Ahmad Dahlan",
+  "Budi Santoso",
+  "Siti Aminah",
+  "Rian Hidayat",
+  "Dewi Lestari",
+  "Eko Prasetyo",
+  "Mega Wijaya",
+  "Aditya Pratama",
+  "Putri Utami",
+  "Fajar Nugraha"
+];
+
+export const buatNamaMahasiswa = (): string => {
+  return DAFTAR_NAMA_MAHASISWA[Math.floor(Math.random() * DAFTAR_NAMA_MAHASISWA.length)];
 };
