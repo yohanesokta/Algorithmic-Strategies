@@ -51,6 +51,7 @@ function tampilkanTersedia(courses) {
             <td>${course.id}</td>
             <td>${course.nama}</td>
             <td>${course.sks}</td>
+            <td>${course.hari}</td>
             <td>${course.ruangan}</td>
             <td>${course.jamMulai}:00 - ${course.jamSelesai}:00</td>
         `;
@@ -88,6 +89,7 @@ function tampilkanSaran(data) {
             <td>${course.id}</td>
             <td>${course.nama}</td>
             <td>${course.sks}</td>
+            <td>${course.hari}</td>
             <td>${course.ruangan}</td>
             <td>${course.jamMulai}:00 - ${course.jamSelesai}:00</td>
         `;
