@@ -27,7 +27,6 @@ export const hitungSaranKRS = (daftarMatkul: MataKuliah[], batasSks: number): Ma
         pendahulu[i] = j;
         break;
       }
-
       const jedaWaktu = (cekApakahLab(matkulUrut[j].ruangan) !== cekApakahLab(matkulUrut[i].ruangan)) ? 0.25 : 0;
       if (matkulUrut[j].jamSelesai + jedaWaktu <= matkulUrut[i].jamMulai) {
         pendahulu[i] = j;
@@ -76,5 +75,11 @@ export const hitungSaranKRS = (daftarMatkul: MataKuliah[], batasSks: number): Ma
     }
   }
 
-  return hasilSaran;
+    const namaTerpilih = new Set<string>();
+
+  return hasilSaran.filter((m) => {
+    if (namaTerpilih.has(m.nama)) return false;
+    namaTerpilih.add(m.nama);
+    return true;
+  });
 };

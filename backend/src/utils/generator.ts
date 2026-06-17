@@ -56,7 +56,6 @@ export const buatDataMataKuliah = (): MataKuliah[] => {
       if (max_penuh > 0) {
         penuh = Math.floor(Math.random() * 2);
         max_penuh -= 1;
-        console.log("dapet\n")
       }
       daftarMatkul.push({
         id: `C${penghitungId++}`,
